@@ -29,4 +29,4 @@ API surface:
 
 Optional persistence: set CIVIC311_REQUEST_DB_URL to enable SQLAlchemy-backed service request and triage review records. Without it, Civic311 remains deterministic and stateless.
 
-License: Apache License 2.0 for code; CC BY 4.0 for documentation.
+License: Code is AGPL-3.0-only, with the TownLight Public Institution Exception for qualifying deployments (see LICENSE and LICENSE-EXCEPTION.md). Documentation is CC BY 4.0.

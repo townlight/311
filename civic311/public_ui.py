@@ -68,7 +68,7 @@ def render_public_lookup_page() -> str:
     <article class="card large"><p class="kicker">Boundary</p><h2>No official dispatch</h2><div class="result warning"><p>Civic311 does not create official work orders, dispatch crews, handle emergencies, provide legal advice, call live LLMs, write back to 311 systems, or replace the system of record.</p></div></article>
   </section>
 </main>
-<footer><p>Civic311 is part of the Apache 2.0 CivicSuite open-source municipal AI project.</p></footer>
+<footer><p>Civic311 is part of the AGPL-3.0 CivicSuite open-source municipal AI project.</p></footer>
 </body>
 </html>
 """
