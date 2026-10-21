@@ -1,8 +1,12 @@
-# Civic311 GitHub Discussions Seed Posts
+<a id="civic311-github-discussions-seed-posts"></a>
 
-## Welcome to Civic311
+# Townlight 311 GitHub Discussions Seed Posts
 
-Civic311 is the CivicSuite module for resident service request intake, deterministic triage, duplicate-candidate review, department routing, and Open311-compatible export checklists.
+<a id="welcome-to-civic311"></a>
+
+## Welcome to Townlight 311
+
+Townlight 311 is the Townlight module for resident service request intake, deterministic triage, duplicate-candidate review, department routing, and Open311-compatible export checklists.
 
 ## What v0.1.0 ships
 

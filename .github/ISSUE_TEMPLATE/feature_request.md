@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest a Civic311 capability
+about: Suggest a Townlight 311 capability
 title: "[Feature]: "
 labels: enhancement
 assignees: ""

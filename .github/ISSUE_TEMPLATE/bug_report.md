@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Report a Civic311 defect
+about: Report a Townlight 311 defect
 title: "[Bug]: "
 labels: bug
 assignees: ""
@@ -12,12 +12,12 @@ Describe the issue.
 
 ## Expected behavior
 
-What should Civic311 have done instead?
+What should Townlight 311 have done instead?
 
 ## Environment
 
-- Civic311 version:
-- CivicCore version:
+- Townlight 311 version:
+- Townlight Core version:
 - Operating system:
 
 ## Evidence
