@@ -1,4 +1,4 @@
-"""Open311-compatible export helpers for Civic311 v0.1.1."""
+"""Open311-compatible export helpers for Townlight 311 v0.1.1."""
 
 from __future__ import annotations
 

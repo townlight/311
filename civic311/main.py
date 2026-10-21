@@ -1,4 +1,4 @@
-"""FastAPI runtime foundation for Civic311."""
+"""FastAPI runtime foundation for Townlight 311."""
 
 import os
 
@@ -18,9 +18,9 @@ from civic311.triage import suggest_triage
 
 
 app = FastAPI(
-    title="Civic311",
+    title='Townlight 311',
     version=__version__,
-    description="Resident service request intake, triage, deduplication, routing, and Open311-compatible export support for CivicSuite.",
+    description='Resident service request intake, triage, deduplication, routing, and Open311-compatible export support for Townlight.',
 )
 
 _request_repository: ServiceRequestRepository | None = None
@@ -68,7 +68,7 @@ def root() -> dict[str, str]:
         "version": __version__,
         "status": "resident service request foundation plus request persistence",
         "message": (
-            "Civic311 package, API foundation, sample request intake, deterministic triage, "
+            "Townlight 311 package, API foundation, sample request intake, deterministic triage, "
             "duplicate-candidate review, department routing checklist, optional database-backed service request "
             "and triage review records, Open311-compatible export helper, and public UI foundation are online; "
             "official dispatch, work-order creation, emergency response, legal advice, live LLM calls, and 311 "
@@ -114,7 +114,7 @@ def get_service_request(request_id: str) -> dict[str, object]:
         raise HTTPException(
             status_code=503,
             detail={
-                "message": "Civic311 request persistence is not configured.",
+                "message": "Townlight 311 request persistence is not configured.",
                 "fix": "Set CIVIC311_REQUEST_DB_URL to retrieve persisted service request records.",
             },
         )
@@ -154,7 +154,7 @@ def get_triage_review(request_id: str) -> dict[str, object]:
         raise HTTPException(
             status_code=503,
             detail={
-                "message": "Civic311 request persistence is not configured.",
+                "message": "Townlight 311 request persistence is not configured.",
                 "fix": "Set CIVIC311_REQUEST_DB_URL to retrieve persisted triage review records.",
             },
         )

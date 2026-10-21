@@ -1,4 +1,4 @@
-"""Resident service request intake helpers for Civic311 v0.1.1."""
+"""Resident service request intake helpers for Townlight 311 v0.1.1."""
 
 from __future__ import annotations
 
@@ -6,7 +6,7 @@ from dataclasses import dataclass
 
 
 DISCLAIMER = (
-    "Civic311 supports resident service request intake and routing, but staff "
+    "Townlight 311 supports resident service request intake and routing, but staff "
     "remain responsible for field verification, prioritization, dispatch, public "
     "communications, and official system-of-record updates."
 )

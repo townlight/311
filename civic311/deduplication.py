@@ -1,4 +1,4 @@
-"""Duplicate-candidate helpers for Civic311 v0.1.1."""
+"""Duplicate-candidate helpers for Townlight 311 v0.1.1."""
 
 from __future__ import annotations
 
@@ -25,7 +25,7 @@ def check_duplicate_candidates(
     notes = (
         f"Search category '{category.strip() or 'unspecified'}' near '{location.strip() or 'unknown location'}'.",
         f"{candidate_count} possible duplicate candidate(s) require staff review.",
-        "Civic311 never merges, closes, or suppresses resident requests automatically.",
+        "Townlight 311 never merges, closes, or suppresses resident requests automatically.",
     )
     return DuplicateCheck(
         request_id=request_id.strip() or "unassigned-request",

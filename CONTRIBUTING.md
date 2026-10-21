@@ -1,6 +1,6 @@
 # Contributing
 
-Thank you for helping Civic311 become useful municipal software.
+Thank you for helping Townlight 311 become useful municipal software.
 
 ## Development Loop
 
@@ -11,7 +11,7 @@ Thank you for helping Civic311 become useful municipal software.
 
 ## Boundaries
 
-- Civic311 gives request-support drafts, not official dispatch, emergency response, work-order creation, legal advice, 311 system write-back, or system-of-record updates.
+- Townlight 311 gives request-support drafts, not official dispatch, emergency response, work-order creation, legal advice, 311 system write-back, or system-of-record updates.
 - Do not present generated triage suggestions, duplicate flags, routing plans, or Open311 exports as dispatch-ready without staff review.
-- Do not import CivicCore placeholder packages.
+- Do not import Townlight Core placeholder packages.
 - Do not claim planned behavior is shipped.

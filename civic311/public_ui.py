@@ -1,17 +1,17 @@
-"""Static public UI shell for Civic311 v0.1.1."""
+"""Static public UI shell for Townlight 311 v0.1.1."""
 
 from __future__ import annotations
 
 
 def render_public_lookup_page() -> str:
-    """Render the public-facing Civic311 sample page."""
+    """Render the public-facing Townlight 311 sample page."""
 
     return """<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Civic311 Resident Service Request Support</title>
+<title>Townlight 311 Resident Service Request Support</title>
 <style>
   :root { --ink:#17202a; --muted:#5c6470; --blue:#214f7a; --green:#2f654c; --gold:#d8ad48; --line:#ccd5df; }
   * { box-sizing: border-box; }
@@ -45,9 +45,9 @@ def render_public_lookup_page() -> str:
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
 <header>
-  <p class="eyebrow">CivicSuite / Civic311 public sample</p>
+  <p class="eyebrow">Townlight / Townlight 311 public sample</p>
   <h1>Resident requests routed without black-box dispatch.</h1>
-  <p class="lede">Civic311 demonstrates service-request intake support: request stubs, deterministic triage, duplicate-candidate review, department routing checklists, and Open311-compatible export artifacts without creating official work orders.</p>
+  <p class="lede">Townlight 311 demonstrates service-request intake support: request stubs, deterministic triage, duplicate-candidate review, department routing checklists, and Open311-compatible export artifacts without creating official work orders.</p>
   <p><span class="badge">v0.1.1 resident service request foundation</span></p>
 </header>
 <main id="main" tabindex="-1">
@@ -62,13 +62,13 @@ def render_public_lookup_page() -> str:
         <ul><li>Confirm location, category, urgency, and contact preference.</li><li>Check duplicate candidates before assignment.</li><li>Prepare resident acknowledgment and Open311-compatible export artifact.</li></ul>
       </div>
     </article>
-    <article class="card"><p class="kicker">Triage</p><h2>Department hints</h2><div class="result"><p>Civic311 suggests a routing bucket; staff confirm ownership before assignment.</p></div></article>
+    <article class="card"><p class="kicker">Triage</p><h2>Department hints</h2><div class="result"><p>Townlight 311 suggests a routing bucket; staff confirm ownership before assignment.</p></div></article>
     <article class="card"><p class="kicker">Duplicates</p><h2>Review, don't suppress</h2><div class="result"><p>Duplicate candidates are surfaced for staff review; requests are never merged automatically.</p></div></article>
     <article class="card"><p class="kicker">Export</p><h2>Open311-ready</h2><div class="result"><p>Exports preserve standard field names for a future official 311 or work-order handoff.</p></div></article>
-    <article class="card large"><p class="kicker">Boundary</p><h2>No official dispatch</h2><div class="result warning"><p>Civic311 does not create official work orders, dispatch crews, handle emergencies, provide legal advice, call live LLMs, write back to 311 systems, or replace the system of record.</p></div></article>
+    <article class="card large"><p class="kicker">Boundary</p><h2>No official dispatch</h2><div class="result warning"><p>Townlight 311 does not create official work orders, dispatch crews, handle emergencies, provide legal advice, call live LLMs, write back to 311 systems, or replace the system of record.</p></div></article>
   </section>
 </main>
-<footer><p>Civic311 is part of the AGPL-3.0 CivicSuite open-source municipal AI project.</p></footer>
+<footer><p>Townlight 311 is part of the AGPL-3.0 Townlight open-source municipal AI project.</p></footer>
 </body>
 </html>
 """

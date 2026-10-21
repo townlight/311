@@ -90,7 +90,7 @@ def test_get_request_without_persistence_returns_actionable_503(monkeypatch) -> 
 
     assert response.status_code == 503
     detail = response.json()["detail"]
-    assert detail["message"] == "Civic311 request persistence is not configured."
+    assert detail["message"] == "Townlight 311 request persistence is not configured."
     assert "Set CIVIC311_REQUEST_DB_URL" in detail["fix"]
 
 

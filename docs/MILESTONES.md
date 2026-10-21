@@ -1,8 +1,10 @@
-# Civic311 Milestones
+<a id="civic311-milestones"></a>
+
+# Townlight 311 Milestones
 
 ## Milestone 0 - Repository foundation
 
-Documentation, governance files, CI, release gates, and CivicCore pin.
+Documentation, governance files, CI, release gates, and Townlight Core pin.
 
 ## Milestone 1 - Runtime shell
 

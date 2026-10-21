@@ -1,10 +1,14 @@
-# Civic311
+<a id="civic311"></a>
 
-Civic311 is the CivicSuite module for resident service request intake, deterministic triage, duplicate-candidate review, department routing, and Open311-compatible export support.
+# Townlight 311
+
+Townlight 311 is the Townlight module for resident service request intake, deterministic triage, duplicate-candidate review, department routing, and Open311-compatible export support.
 
 Current state: **v0.1.1 resident service request foundation plus request persistence release**, aligned to `civiccore==0.3.0`. This repo ships a FastAPI package, health/root endpoints, documentation gates, deterministic sample request intake, triage suggestions, optional database-backed service request and triage review records, duplicate-candidate checks, routing checklists, Open311-compatible export helper, and accessible public sample UI at `/civic311`. It does **not** ship official dispatch, work-order creation, emergency response, legal advice, live LLM calls, 311 system write-back, or 311 system-of-record integrations.
 
-## What Civic311 Does
+<a id="what-civic311-does"></a>
+
+## What Townlight 311 Does
 
 - Create sample resident service request intake stubs.
 - Suggest deterministic triage buckets for staff review.
@@ -14,7 +18,9 @@ Current state: **v0.1.1 resident service request foundation plus request persist
 - Produce Open311-compatible export checklists.
 - Demonstrate a public service-request UI at `/civic311`.
 
-## What Civic311 Does Not Do
+<a id="what-civic311-does-not-do"></a>
+
+## What Townlight 311 Does Not Do
 
 - It does not dispatch crews or create official work orders.
 - It does not handle emergencies.
@@ -26,7 +32,7 @@ Current state: **v0.1.1 resident service request foundation plus request persist
 ## API Surface
 
 - `GET /` returns the shipped/planned boundary.
-- `GET /health` returns package and CivicCore versions.
+- `GET /health` returns package and Townlight Core versions.
 - `GET /civic311` returns the accessible public sample UI.
 - `POST /api/v1/civic311/intake` returns a sample request intake stub.
 - `GET /api/v1/civic311/intake/{request_id}` retrieves a persisted service request when `CIVIC311_REQUEST_DB_URL` is configured.

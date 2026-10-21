@@ -1,4 +1,4 @@
-"""Department routing helpers for Civic311 v0.1.1."""
+"""Department routing helpers for Townlight 311 v0.1.1."""
 
 from __future__ import annotations
 
