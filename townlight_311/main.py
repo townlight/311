@@ -1,20 +1,22 @@
 """FastAPI runtime foundation for Townlight 311."""
 
 import os
+from importlib.metadata import version as _pkg_version
 
-from civiccore import __version__ as CIVICCORE_VERSION
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 
-from civic311 import __version__
-from civic311.deduplication import check_duplicate_candidates
-from civic311.open311_export import build_open311_export
-from civic311.persistence import ServiceRequestRepository, StoredTriageReview
-from civic311.public_ui import render_public_lookup_page
-from civic311.request_intake import create_service_request_stub
-from civic311.routing import plan_department_route
-from civic311.triage import suggest_triage
+from townlight_311 import __version__
+from townlight_311.deduplication import check_duplicate_candidates
+from townlight_311.open311_export import build_open311_export
+from townlight_311.persistence import ServiceRequestRepository, StoredTriageReview
+from townlight_311.public_ui import render_public_lookup_page
+from townlight_311.request_intake import create_service_request_stub
+from townlight_311.routing import plan_department_route
+from townlight_311.triage import suggest_triage
+
+TOWNLIGHT_CORE_VERSION = _pkg_version("townlight-core")
 
 
 app = FastAPI(
@@ -64,17 +66,19 @@ def root() -> dict[str, str]:
     """Return current product state without overstating unshipped behavior."""
 
     return {
-        "name": "Civic311",
+        "name": "Townlight 311",
         "version": __version__,
-        "status": "resident service request foundation plus request persistence",
+        "status": "developer-only prototype helper API; 0.2.0 source work is an integration candidate and is not released or tested-installed",
         "message": (
-            "Townlight 311 package, API foundation, sample request intake, deterministic triage, "
-            "duplicate-candidate review, department routing checklist, optional database-backed service request "
-            "and triage review records, Open311-compatible export helper, and public UI foundation are online; "
-            "official dispatch, work-order creation, emergency response, legal advice, live LLM calls, and 311 "
-            "system-of-record integrations are not implemented yet."
+            "This module is a developer-only prototype helper API. It is not the Windows runtime and is not a "
+            "complete standalone product. The implemented Windows routes are /desktop/v1/service-requests, with "
+            "Open311 at /desktop/v1/service-requests/open311/... . The townlight_311.workflow library is under "
+            "integration verification; it is a candidate and is not installed."
         ),
-        "next_step": "Post-v0.1.1 roadmap: configured service catalog, CivicAccess/CivicCode handoffs, and work-order integrations",
+        "next_step": (
+            "Use the implemented Windows routes. The 0.2.0 source work is an integration candidate and has not "
+            "been released or tested as an installed Windows build."
+        ),
     }
 
 
@@ -84,20 +88,20 @@ def health() -> dict[str, str]:
 
     return {
         "status": "ok",
-        "service": "civic311",
+        "service": "townlight_311",
         "version": __version__,
-        "civiccore_version": CIVICCORE_VERSION,
+        "townlight_core_version": TOWNLIGHT_CORE_VERSION,
     }
 
 
-@app.get("/civic311", response_class=HTMLResponse)
-def public_civic311_page() -> str:
+@app.get("/townlight_311", response_class=HTMLResponse)
+def public_townlight_311_page() -> str:
     """Return the public sample 311 support UI."""
 
     return render_public_lookup_page()
 
 
-@app.post("/api/v1/civic311/intake")
+@app.post("/api/v1/townlight_311/intake")
 def service_request_intake(request: IntakeRequest) -> dict[str, object]:
     result = _create_service_request(
         request_id=request.request_id,
@@ -108,7 +112,7 @@ def service_request_intake(request: IntakeRequest) -> dict[str, object]:
     return result.__dict__
 
 
-@app.get("/api/v1/civic311/intake/{request_id}")
+@app.get("/api/v1/townlight_311/intake/{request_id}")
 def get_service_request(request_id: str) -> dict[str, object]:
     if _request_database_url() is None:
         raise HTTPException(
@@ -124,13 +128,13 @@ def get_service_request(request_id: str) -> dict[str, object]:
             status_code=404,
             detail={
                 "message": "Service request record not found.",
-                "fix": "Use a request_id returned by POST /api/v1/civic311/intake.",
+                "fix": "Use a request_id returned by POST /api/v1/townlight_311/intake.",
             },
         )
     return stored.__dict__
 
 
-@app.post("/api/v1/civic311/triage")
+@app.post("/api/v1/townlight_311/triage")
 def triage(request: TriageRequest) -> dict[str, object]:
     if _request_database_url() is not None:
         stored = _get_request_repository().create_triage_review(
@@ -148,7 +152,7 @@ def triage(request: TriageRequest) -> dict[str, object]:
     ).__dict__
 
 
-@app.get("/api/v1/civic311/triage/{request_id}")
+@app.get("/api/v1/townlight_311/triage/{request_id}")
 def get_triage_review(request_id: str) -> dict[str, object]:
     if _request_database_url() is None:
         raise HTTPException(
@@ -164,13 +168,13 @@ def get_triage_review(request_id: str) -> dict[str, object]:
             status_code=404,
             detail={
                 "message": "Triage review record not found.",
-                "fix": "Use a request_id returned by POST /api/v1/civic311/triage.",
+                "fix": "Use a request_id returned by POST /api/v1/townlight_311/triage.",
             },
         )
     return _stored_triage_response(stored)
 
 
-@app.post("/api/v1/civic311/deduplicate")
+@app.post("/api/v1/townlight_311/deduplicate")
 def deduplicate(request: DeduplicationRequest) -> dict[str, object]:
     return check_duplicate_candidates(
         request_id=request.request_id,
@@ -180,7 +184,7 @@ def deduplicate(request: DeduplicationRequest) -> dict[str, object]:
     ).__dict__
 
 
-@app.post("/api/v1/civic311/routing")
+@app.post("/api/v1/townlight_311/routing")
 def routing(request: RoutingRequest) -> dict[str, object]:
     return plan_department_route(
         category=request.category,
@@ -188,7 +192,7 @@ def routing(request: RoutingRequest) -> dict[str, object]:
     ).__dict__
 
 
-@app.post("/api/v1/civic311/open311-export")
+@app.post("/api/v1/townlight_311/open311-export")
 def open311_export(request: Open311ExportRequest) -> dict[str, object]:
     return build_open311_export(
         service_request_id=request.service_request_id,

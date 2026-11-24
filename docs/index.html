@@ -12,17 +12,65 @@ body{margin:0;font-family:"Aptos","Segoe UI",sans-serif;color:#17202a;background
 <header>
   <p class="eyebrow">Townlight / Townlight 311</p>
   <h1>Resident requests routed without black-box dispatch.</h1>
-  <p class="lede">Townlight 311 v0.1.1 ships a foundation for service request intake, deterministic triage, optional database-backed request records, duplicate-candidate review, department routing, Open311-compatible exports, an accessible sample UI, and <code>civiccore==0.3.0</code> alignment.</p>
-  <p><span class="badge">Shipping v0.1.1</span></p>
+  <p class="lede">Townlight 311 is the Townlight module for resident service-request intake, privacy-aware tracking, staff workflow, records, notifications, and Open311-compatible interchange. This page describes the <strong>0.2.0 source candidate</strong>: source work under integration, not an installed, verified, or shipped build.</p>
+  <p><span class="badge">0.2.0 source candidate &mdash; not installed, verified, or shipped</span></p>
 </header>
 <main>
   <section class="grid">
-    <article class="card"><h2>What ships</h2><ul><li>Sample resident request intake.</li><li>Triage suggestions.</li><li>Optional request persistence with <code>CIVIC311_REQUEST_DB_URL</code>.</li><li>Duplicate-candidate checks.</li><li>Department routing checklists.</li><li>Open311-compatible export helper.</li><li>Public sample UI at <code>/civic311</code>.</li></ul></article>
-    <article class="card"><h2>What does not ship</h2><p>Townlight 311 does not dispatch crews, create official work orders, handle emergencies, provide legal advice, call live LLMs, write back to 311 systems, or replace a 311 system of record.</p></article>
-    <article class="card"><h2>Repository</h2><p><a href="https://github.com/townlight/311">github.com/CivicSuite/civic311</a></p></article>
-    <article class="card"><h2>Dependency</h2><p>Pinned to <code>civiccore==0.3.0</code>. Townlight Core remains dependency-only; it never imports from Townlight 311.</p></article>
+    <article class="card">
+      <h2>What this candidate implements</h2>
+      <ul>
+        <li>Private resident intake, tracking, recovery, and photos.</li>
+        <li>Staff queues, lifecycle, assignment, transfer, duplicate handling, and reopen.</li>
+        <li>Real SMTP notification states (<code>sent</code>, <code>pending</code>, <code>failed</code>, <code>uncertain</code>).</li>
+        <li>CSV/JSON import with exact preview.</li>
+        <li>Supported, authenticated Open311 subset.</li>
+        <li>Records archive handoff and approved Data.</li>
+        <li>Verified parcel, permit, and inspection links.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h2>Existing native roles</h2>
+      <p>The candidate enforces the existing native roles:</p>
+      <ul>
+        <li><code>local-admin</code></li>
+        <li><code>city-staff</code></li>
+        <li><code>clerk</code></li>
+      </ul>
+      <p>Clerk gets 311 only; Records/Data receiving requires additional permissions.</p>
+    </article>
+    <article class="card">
+      <h2>What is not included</h2>
+      <p>Townlight 311 does not dispatch crews, create official work orders, handle emergencies, provide legal advice, call live LLMs, write back to 311 systems, or replace a 311 system of record. Communications and Parks features are not finished and are not promised by this candidate.</p>
+    </article>
+    <article class="card">
+      <h2>Existing release (excludes this 311 candidate)</h2>
+      <p>The current Townlight Suite <strong>1.9.3.2</strong> download remains the existing release and <strong>excludes the new Townlight 311</strong>.</p>
+      <p><a href="https://github.com/townlight/townlight/releases/tag/townlight-windows-v1.9.3.2">Download the existing Suite 1.9.3.2 release</a></p>
+    </article>
+    <article class="card">
+      <h2>Repository</h2>
+      <p><a href="https://github.com/townlight/311">github.com/townlight/311</a></p>
+      <p>Docs: <a href="https://github.com/townlight/311/blob/main/README.txt">README</a> and <a href="https://github.com/townlight/311/blob/main/USER-MANUAL.txt">User Manual</a>.</p>
+    </article>
+    <article class="card">
+      <h2>Dependency</h2>
+      <p>Aligned with <code>civiccore</code>. Townlight Core remains dependency-only; it never imports from Townlight 311.</p>
+    </article>
+  </section>
+
+  <section class="card" style="margin-top:18px">
+    <h2>FAQ: What does &ldquo;source candidate&rdquo; mean?</h2>
+    <p><strong>Q: Is this a finished or released product?</strong><br>
+    No. &ldquo;0.2.0 source candidate&rdquo; means the 0.2.0 source work exists in the repository under integration verification. It has not been released, and it has not been tested as an installed Windows build.</p>
+    <p><strong>Q: Can I install or rely on it?</strong><br>
+    Not as a supported build. Nothing here is a shipped, supported, or acceptance-tested product. Use the existing Suite 1.9.3.2 release for current use; it does not contain Townlight 311.</p>
+    <p><strong>Q: Does it replace a 311 system of record?</strong><br>
+    No. It supports intake, tracking, staff workflow, records, notifications, and a supported Open311 subset, but it is not full Open311 conformance and does not replace a system of record.</p>
+    <p><strong>Q: Are delivery and integrations guaranteed?</strong><br>
+    No. Notification delivery is not guaranteed, and integrations such as communications and Parks are not finished by this candidate.</p>
   </section>
 </main>
-<footer><p>AGPL-3.0 code. CC BY 4.0 docs. Run locally by the city.</p></footer>
+<footer><p>AGPL-3.0 code. CC BY 4.0 docs. Source candidate only; no public deployment.</p></footer>
 </body>
 </html>

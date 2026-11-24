@@ -1,62 +1,73 @@
-> **Parked foundation — outside the released Windows suite.** This repository contains exploratory/support code, not a completed Townlight product. It is not installed or supported by Windows 1.8.1.1. Historical examples, package names and dependency pins below describe this foundation and must not be used as current suite installation instructions. Use the [released Windows suite, current modules and acceptance limits](https://townlight.github.io/versions.html).
-
-<a id="civic311"></a>
-
 # Townlight 311
 
-Townlight 311 is the Townlight module for resident service request intake, deterministic triage, duplicate-candidate review, department routing, and Open311-compatible export support.
+Townlight 311 is the Townlight module for resident service-request intake, privacy-aware tracking, staff workflow, records, notifications, and Open311-compatible interchange.
 
-Current state: **v0.1.1 resident service request foundation plus request persistence release**, aligned to `civiccore==0.3.0`. This repo ships a FastAPI package, health/root endpoints, documentation gates, deterministic sample request intake, triage suggestions, optional database-backed service request and triage review records, duplicate-candidate checks, routing checklists, Open311-compatible export helper, and accessible public sample UI at `/civic311`. It does **not** ship official dispatch, work-order creation, emergency response, legal advice, live LLM calls, 311 system write-back, or 311 system-of-record integrations.
+## Status: 0.2.0 source work — integration candidate only
 
-<a id="what-civic311-does"></a>
+This repository contains **0.2.0 source work**. It is an **integration candidate**: it has **not been released**, and it has **not been tested as an installed Windows build**. Nothing here should be read as a shipped, supported, or acceptance-tested product, and no release date or release outcome is promised.
 
-## What Townlight 311 Does
+The principal package is the distribution **`townlight-311`**, imported as **`townlight_311`**.
 
-- Create sample resident service request intake stubs.
-- Suggest deterministic triage buckets for staff review.
-- Persist service request and triage review records when `CIVIC311_REQUEST_DB_URL` is configured.
-- Flag possible duplicates without merging requests.
-- Build department routing and resident-update checklists.
-- Produce Open311-compatible export checklists.
-- Demonstrate a public service-request UI at `/civic311`.
+## Workflow library under integration verification
 
-<a id="what-civic311-does-not-do"></a>
+`townlight_311.workflow` is under integration verification; it is an integration candidate and is not installed. The implemented Windows routes are `/desktop/v1/service-requests`, with Open311 at `/desktop/v1/service-requests/open311/...`.
 
-## What Townlight 311 Does Not Do
+## Resident intake, privacy, tracking, and recovery
 
-- It does not dispatch crews or create official work orders.
-- It does not handle emergencies.
-- It does not provide legal advice.
-- It does not call live LLMs in v0.1.1.
-- It does not write back to 311 or work-order systems.
-- It does not replace a 311 system of record.
+- Residents submit service requests through resident intake.
+- Tracking is privacy-aware: resident-facing tracking does not expose internal detail.
+- A recovery flow lets a resident recover access to their tracking information without staff disclosing another resident's data.
 
-## API Surface
+## Staff lifecycle and roles
 
-- `GET /` returns the shipped/planned boundary.
-- `GET /health` returns package and Townlight Core versions.
-- `GET /civic311` returns the accessible public sample UI.
-- `POST /api/v1/civic311/intake` returns a sample request intake stub.
-- `GET /api/v1/civic311/intake/{request_id}` retrieves a persisted service request when `CIVIC311_REQUEST_DB_URL` is configured.
-- `POST /api/v1/civic311/triage` returns deterministic triage suggestions.
-- `GET /api/v1/civic311/triage/{request_id}` retrieves a persisted triage review when `CIVIC311_REQUEST_DB_URL` is configured.
-- `POST /api/v1/civic311/deduplicate` returns duplicate-candidate review notes.
-- `POST /api/v1/civic311/routing` returns department-routing checklists.
-- `POST /api/v1/civic311/open311-export` returns an Open311-compatible export checklist.
+The workflow library covers the staff lifecycle and enforces the existing native roles:
 
-## Optional Persistence
+- `local-admin`
+- `city-staff`
+- `clerk`
 
-Set `CIVIC311_REQUEST_DB_URL` to enable local SQLAlchemy-backed service request and triage review records.
+## Records and receiving-role permission
 
-## Local Development
+Records/Data receiving is gated by additional required permissions; Clerk gets 311 only and does not automatically receive Records/Data access. Records output is produced as ZIP archives that report the **actual bytes** written together with the operation history.
+
+## Attachments
+
+Attachments are accepted up to **10 MiB** each.
+
+## Notifications
+
+Notification delivery uses SMTP with STARTTLS; connection settings are managed by an administrator. Notification states are:
+
+- `sent`
+- `pending`
+- `failed`
+- `uncertain`
+
+Delivery is **not guaranteed**. In particular, an SMTP acceptance is not proof that a message reached a recipient, and the `uncertain` state exists precisely because delivery status may be unknown after a send.
+
+## Open311
+
+The Open311 integration supports authenticated catalogue, read, and create operations with JSON/XML for the **supported subset** only. This is **not full Open311 conformance** and must not be represented as such.
+
+## CSV/JSON import and export
+
+- Import accepts CSV or JSON up to **2 MiB** and **1000 rows**.
+- Import keys rows by **stable external IDs** together with a **source key**, and produces an **exact preview hash**.
+- Export is limited to **10,000 requests**. A request that would exceed the limit **fails** instead of silently truncating the export.
+
+## Developer-only prototype helper API
+
+The old `townlight_311.main` FastAPI module is a **developer-only prototype helper API**. It is **not the Windows runtime** and is **not a complete standalone product**. Its existing helper routes are unchanged; do not confuse it with, or substitute it for, the implemented Windows routes (`/desktop/v1/service-requests`, with Open311 at `/desktop/v1/service-requests/open311/...`).
+
+## Development
 
 ```bash
 python -m pip install -e ".[dev]"
 python -m pytest -q
-bash scripts/verify-release.sh
 ```
+
+These commands describe the source tree only. They do not imply that an installed Windows build has been produced or tested.
 
 ## License
 
-Code: AGPL-3.0-only, with the TownLight Public Institution Exception for qualifying deployments. See [LICENSE](LICENSE) and [LICENSE-EXCEPTION.md](LICENSE-EXCEPTION.md).
-Documentation is CC BY 4.0.
+Code: AGPL-3.0-only, with the TownLight Public Institution Exception for qualifying deployments. See [LICENSE](LICENSE) and [LICENSE-EXCEPTION.md](LICENSE-EXCEPTION.md). Documentation is CC BY 4.0.

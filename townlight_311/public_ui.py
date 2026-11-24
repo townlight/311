@@ -1,4 +1,4 @@
-"""Static public UI shell for Townlight 311 v0.1.1."""
+"""Static public UI shell for Townlight 311 v0.2.0."""
 
 from __future__ import annotations
 
@@ -48,7 +48,7 @@ def render_public_lookup_page() -> str:
   <p class="eyebrow">Townlight / Townlight 311 public sample</p>
   <h1>Resident requests routed without black-box dispatch.</h1>
   <p class="lede">Townlight 311 demonstrates service-request intake support: request stubs, deterministic triage, duplicate-candidate review, department routing checklists, and Open311-compatible export artifacts without creating official work orders.</p>
-  <p><span class="badge">v0.1.1 resident service request foundation</span></p>
+  <p><span class="badge">v0.2.0 resident service request foundation</span></p>
 </header>
 <main id="main" tabindex="-1">
   <section class="grid" aria-labelledby="lookup-title">

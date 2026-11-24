@@ -1,43 +1,44 @@
-Townlight 311 User Manual
-====================
+# Townlight 311 User Manual
 
-For non-technical users
------------------------
+> **Status: 0.2.0 source work — integration candidate only.** This has not been released and has not been tested as an installed Windows build. Nothing here is an acceptance claim or a release promise.
 
-Townlight 311 helps city staff organize resident service requests before they become official work orders. It can create a sample intake stub, suggest a triage bucket, surface duplicate candidates, prepare routing steps, and assemble an Open311-compatible export checklist.
+Townlight 311 is the Townlight module for resident service-request intake, privacy-aware tracking, staff workflow, records, notifications, and Open311-compatible interchange. The principal package is the distribution `townlight-311`, imported as `townlight_311`. The workflow library `townlight_311.workflow` is under integration verification; it is an integration candidate and is not installed. The implemented Windows routes are `/desktop/v1/service-requests`, with Open311 at `/desktop/v1/service-requests/open311/...`.
 
-Current state: 0.1.1 resident service request foundation plus request persistence release, aligned to civiccore==0.3.0. Townlight 311 can optionally save service request and triage review records when IT configures CIVIC311_REQUEST_DB_URL. Townlight 311 does not dispatch crews, create official work orders, handle emergencies, provide legal advice, call live LLMs, write back to 311/work-order systems, or update a 311 system of record. Staff own every decision.
+## For New Residents
 
-For IT and technical staff
---------------------------
+- Submit a service request through resident intake.
+- Receive privacy-aware tracking information; resident-facing tracking does not expose internal detail.
+- If you lose access to your tracking information, use the recovery flow. Recovery is designed so staff never disclose another resident's data.
 
-Townlight 311 is a FastAPI Python package pinned to civiccore==0.3.0. The current runtime exposes:
+## For Staff
 
-- GET /
-- GET /health
-- GET /civic311
-- POST /api/v1/civic311/intake
-- GET /api/v1/civic311/intake/{request_id}
-- POST /api/v1/civic311/triage
-- GET /api/v1/civic311/triage/{request_id}
-- POST /api/v1/civic311/deduplicate
-- POST /api/v1/civic311/routing
-- POST /api/v1/civic311/open311-export
+- Your current role controls what you can do. Existing native roles are `local-admin`, `city-staff`, and `clerk`. Existing Clerk gets 311 only; Records/Data receiving requires additional permissions.
+- Staff workflow follows the staff lifecycle and role assignments maintained by administrators.
+- Records/Data receiving requires additional permissions; Clerk gets 311 only and does not automatically receive access.
+- Records are produced as ZIP archives that report the actual bytes written plus the operation history.
+- You can import CSV or JSON data (see limits below) and preview it before commit.
 
-Run:
+## For Administrators
 
-python -m pip install -e ".[dev]"
-python -m pytest -q
-bash scripts/verify-release.sh
+- Manage SMTP notification settings, including STARTTLS connection settings.
+- Notification states are `sent`, `pending`, `failed`, and `uncertain`. Delivery is **not guaranteed**; `uncertain` means status is unknown after a send was attempted.
+- Attachments are limited to **10 MiB** each.
+- Import accepts CSV or JSON up to **2 MiB** and **1000 rows**, keyed by stable external IDs plus a source key, with an exact preview hash.
+- Export is capped at **10,000 requests**; an export that would exceed the cap fails rather than truncating.
+- Open311 support covers authenticated catalogue, read, and create with JSON/XML for the supported subset only. It is **not full Open311 conformance**.
 
-Set CIVIC311_REQUEST_DB_URL to enable local SQLAlchemy-backed service request and triage review records. If the variable is not set, Townlight 311 keeps deterministic stateless behavior and retrieval endpoints return actionable configuration guidance.
+## Technical Architecture
 
-Architecture
-------------
+```mermaid
+flowchart LR
+  RP["Resident portal"] --> EI["Encrypted inbox"]
+  OHP["Outbound host pump"] --> EI
+  OHP --> DB["311 database"]
+  DB --> REC["Records"]
+  DB --> AD["Approved data"]
+  DB --> SMTP["SMTP notifications"]
+```
 
-Resident -> Townlight 311 -> Townlight Core v0.3.0
-311 coordinator / department staff -> Townlight 311
-Townlight 311 future handoffs -> Townlight Access, Townlight Code
-Townlight 311 -> Open311-compatible export checklist
+Residents submit through the resident portal into an encrypted inbox. The outbound host pump works with the encrypted inbox and persists into the 311 database. Records, approved data, and SMTP notifications are produced from the 311 database. Notification delivery is not guaranteed, and Open311 support is limited to the supported subset described above.
 
-Townlight 311 depends on Townlight Core. Townlight Core does not depend on Townlight 311. Townlight 311 v0.1.1 uses deterministic sample request data plus optional local request persistence; live 311 systems, official dispatch, work-order creation, emergency response, legal advice, live LLM calls, and production 311-system integrations are future work.
+The old `townlight_311.main` module is a developer-only prototype helper API. It is not the Windows runtime and is not a complete standalone product. The implemented Windows routes are `/desktop/v1/service-requests`, with Open311 at `/desktop/v1/service-requests/open311/...`.

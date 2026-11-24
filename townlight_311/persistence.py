@@ -6,9 +6,8 @@ from datetime import UTC, datetime
 import sqlalchemy as sa
 from sqlalchemy import Engine, create_engine
 
-from civic311.request_intake import ServiceRequestIntake, create_service_request_stub
-from civic311.triage import suggest_triage
-
+from townlight_311.request_intake import ServiceRequestIntake, create_service_request_stub
+from townlight_311.triage import suggest_triage
 
 metadata = sa.MetaData()
 
@@ -23,7 +22,7 @@ service_request_records = sa.Table(
     sa.Column("disclaimer", sa.Text(), nullable=False),
     sa.Column("created_at", sa.DateTime(timezone=True), nullable=False),
     sa.Column("updated_at", sa.DateTime(timezone=True), nullable=False),
-    schema="civic311",
+    schema="townlight_311",
 )
 
 triage_review_records = sa.Table(
@@ -37,7 +36,7 @@ triage_review_records = sa.Table(
     sa.Column("staff_review_required", sa.Boolean(), nullable=False),
     sa.Column("disclaimer", sa.Text(), nullable=False),
     sa.Column("created_at", sa.DateTime(timezone=True), nullable=False),
-    schema="civic311",
+    schema="townlight_311",
 )
 
 
@@ -59,11 +58,11 @@ class ServiceRequestRepository:
     def __init__(self, *, db_url: str | None = None, engine: Engine | None = None) -> None:
         base_engine = engine or create_engine(db_url or "sqlite+pysqlite:///:memory:", future=True)
         if base_engine.dialect.name == "sqlite":
-            self.engine = base_engine.execution_options(schema_translate_map={"civic311": None})
+            self.engine = base_engine.execution_options(schema_translate_map={"townlight_311": None})
         else:
             self.engine = base_engine
             with self.engine.begin() as connection:
-                connection.execute(sa.text("CREATE SCHEMA IF NOT EXISTS civic311"))
+                connection.execute(sa.text("CREATE SCHEMA IF NOT EXISTS townlight_311"))
         metadata.create_all(self.engine)
 
     def create_request(
