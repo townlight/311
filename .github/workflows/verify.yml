@@ -46,14 +46,17 @@ jobs:
   verify:
     needs: changes
     if: needs.changes.outputs.code == 'true'
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: bash
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
         with:
-          python-version: "3.11"
-      - name: Install CivicCore release wheel
-        run: python -m pip install https://github.com/CivicSuite/civiccore/releases/download/v0.3.0/civiccore-0.3.0-py3-none-any.whl
+          python-version: "3.13"
+      - name: Install TownlightCore
+        run: python -m pip install git+https://github.com/townlight/core.git@2f6ba9be4a95e3772dc47a3682ac780c5283b626
       - name: Install package
         run: python -m pip install -e ".[dev]"
       - name: Run release gate

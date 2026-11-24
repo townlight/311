@@ -1,10 +1,10 @@
-"""Resident request triage helpers for Townlight 311 v0.1.1."""
+"""Resident request triage helpers for Townlight 311 v0.2.0."""
 
 from __future__ import annotations
 
 from dataclasses import dataclass
 
-from civic311.request_intake import DISCLAIMER
+from townlight_311.request_intake import DISCLAIMER
 
 
 @dataclass(frozen=True)

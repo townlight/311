@@ -3,20 +3,21 @@ requires = ["hatchling>=1.27.0"]
 build-backend = "hatchling.build"
 
 [project]
-name = "civic311"
-version = "0.1.1"
+name = "townlight-311"
+version = "0.2.0"
 description = "Townlight 311 runtime foundation for resident service request intake, triage, deduplication, routing, and Open311-compatible export support."
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "AGPL-3.0-only" }
 authors = [
-  { name = "CivicSuite contributors" }
+  { name = "Townlight contributors" }
 ]
 dependencies = [
-  "civiccore==0.3.0",
+  "townlight-core==1.3.0.dev2",
   "fastapi>=0.115.0,<1.0.0",
   "sqlalchemy>=2.0.0,<3.0.0",
   "uvicorn[standard]>=0.30.0,<1.0.0",
+  "cryptography>=44,<47",
 ]
 
 [project.optional-dependencies]
@@ -32,11 +33,11 @@ dev = [
 testpaths = ["tests"]
 
 [tool.hatch.build.targets.wheel]
-packages = ["civic311"]
+packages = ["townlight_311"]
 
 [tool.hatch.build.targets.sdist]
 include = [
-  "civic311",
+  "townlight_311",
   "scripts",
   "tests",
   "README.md",
@@ -49,4 +50,3 @@ include = [
 [tool.ruff]
 target-version = "py311"
 line-length = 100
-
