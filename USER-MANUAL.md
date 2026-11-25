@@ -12,9 +12,9 @@ Townlight 311 is the Townlight module for resident service-request intake, priva
 
 ## For Staff
 
-- Your current role controls what you can do. Existing native roles are `local-admin`, `city-staff`, and `clerk`. Existing Clerk gets 311 only; Records/Data receiving requires additional permissions.
+- Your current role controls what you can do. Existing native roles are `local-admin`, `city-staff`, `clerk`, `records-staff`, and `code-staff`. `local-admin` and `city-staff` have all active profile module capabilities. `clerk` has Meetings, Notice, Access, 311, Communications, and Parks workflow access, but not Records, Code, or Data. `records-staff` has Records only; `code-staff` has Code only.
 - Staff workflow follows the staff lifecycle and role assignments maintained by administrators.
-- Records/Data receiving requires additional permissions; Clerk gets 311 only and does not automatically receive access.
+- Records producer archive handoff requires both the module and Records access, so use `city-staff` or `local-admin` for that handoff. Records retrieval can also use `records-staff`. Aggregate Data approval uses `local-admin`.
 - Records are produced as ZIP archives that report the actual bytes written plus the operation history.
 - You can import CSV or JSON data (see limits below) and preview it before commit.
 
