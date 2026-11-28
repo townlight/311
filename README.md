@@ -2,15 +2,15 @@
 
 Townlight 311 is the Townlight module for resident service-request intake, privacy-aware tracking, staff workflow, records, notifications, and Open311-compatible interchange.
 
-## Status: 0.2.0 source work — integration candidate only
+## Status: 0.2.0 ships in the Windows 1.10.0.1 public beta
 
-This repository contains **0.2.0 source work**. It is an **integration candidate**: it has **not been released**, and it has **not been tested as an installed Windows build**. Nothing here should be read as a shipped, supported, or acceptance-tested product, and no release date or release outcome is promised.
+Townlight 311 0.2.0 is included in the signed [Townlight for Windows 1.10.0.1](https://github.com/townlight/townlight/releases/tag/townlight-windows-v1.10.0.1) public beta. In the [release acceptance record](https://github.com/townlight/townlight/releases/download/townlight-windows-v1.10.0.1/ACCEPTANCE-Windows-1.10.0.1.md), on two Windows PCs, a resident submitted a 311 request with a photo, followed its status and saw the public comment. The staff workflow completed eight observed milestones across 311, Communications and Parks. This is a public beta, not a general-availability release.
 
 The principal package is the distribution **`townlight-311`**, imported as **`townlight_311`**.
 
-## Workflow library under integration verification
+## Workflow library
 
-`townlight_311.workflow` is under integration verification; it is an integration candidate and is not installed. The implemented Windows routes are `/desktop/v1/service-requests`, with Open311 at `/desktop/v1/service-requests/open311/...`.
+`townlight_311.workflow` is included in the Windows 1.10.0.1 public beta. The implemented Windows routes are `/desktop/v1/service-requests`, with Open311 at `/desktop/v1/service-requests/open311/...`.
 
 ## Resident intake, privacy, tracking, and recovery
 
@@ -66,7 +66,7 @@ python -m pip install -e ".[dev]"
 python -m pytest -q
 ```
 
-These commands describe the source tree only. They do not imply that an installed Windows build has been produced or tested.
+These commands run the source tree. The installed Windows build is the signed 1.10.0.1 public beta.
 
 ## License
 
