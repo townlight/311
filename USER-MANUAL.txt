@@ -1,8 +1,8 @@
 # Townlight 311 User Manual
 
-> **Status: 0.2.0 source work — integration candidate only.** This has not been released and has not been tested as an installed Windows build. Nothing here is an acceptance claim or a release promise.
+> **Status: 0.2.0 ships in the signed [Townlight for Windows 1.10.0.1](https://github.com/townlight/townlight/releases/tag/townlight-windows-v1.10.0.1) public beta.** The [release acceptance record](https://github.com/townlight/townlight/releases/download/townlight-windows-v1.10.0.1/ACCEPTANCE-Windows-1.10.0.1.md) lists what was tested. This is a public beta, not a general-availability release.
 
-Townlight 311 is the Townlight module for resident service-request intake, privacy-aware tracking, staff workflow, records, notifications, and Open311-compatible interchange. The principal package is the distribution `townlight-311`, imported as `townlight_311`. The workflow library `townlight_311.workflow` is under integration verification; it is an integration candidate and is not installed. The implemented Windows routes are `/desktop/v1/service-requests`, with Open311 at `/desktop/v1/service-requests/open311/...`.
+Townlight 311 is the Townlight module for resident service-request intake, privacy-aware tracking, staff workflow, records, notifications, and Open311-compatible interchange. The principal package is the distribution `townlight-311`, imported as `townlight_311`. The workflow library `townlight_311.workflow` is included in the Windows 1.10.0.1 public beta. The implemented Windows routes are `/desktop/v1/service-requests`, with Open311 at `/desktop/v1/service-requests/open311/...`.
 
 ## For New Residents
 
